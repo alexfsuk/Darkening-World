@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DarkeningWorld.entity;
+
+import DarkeningWorld.entity.projectile.Projectile;
+import DarkeningWorld.graphics.Screen;
+import DarkeningWorld.graphics.Sprite;
+import DarkeningWorld.level.Level;
+import java.util.Random;
+
+/**
+ *
+ * @author alex-_000
+ */
+public class Entity {
+    
+    protected int x, y;
+    protected Sprite sprite;
+    private boolean removed = false;
+    protected Level level;
+    protected final Random random = new Random();
+    protected int hits = 0;
+    protected Entity killedBy;
+    protected String name;
+    
+    public void update(){
+    }
+    
+    public void render(Screen screen){
+        if (sprite != null) screen.renderSprite((int)x, (int)y, sprite, true);
+    }
+    
+    public Sprite getSprite(){
+        return sprite;
+    }
+    
+    public void remove(){
+        // Remove Entity from Level!
+        removed = true;
+    }
+    
+    public double getX() { return x; }
+    public double getY() { return y; }
+    
+    public boolean isRemoved(){
+        return removed;
+    }
+    
+    public void init(Level level){
+        this.level = level;
+    }
+    
+    public boolean hit(Projectile p){
+        boolean dead = false;
+        hits++;
+        return dead;
+    } 
+    public int getHits(){ return hits; }
+    public String getName(){ return name; }
+    
+    
+}
