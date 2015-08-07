@@ -45,10 +45,12 @@ public class Player extends Mob {
         
     }
     
-    public Player(int x, int y, Keyboard input){
+    public Player(int x, int y, Keyboard input, int hp, int xpValue){
         this.x = x;
         this.y = y;
         this.input = input;
+        this.hp = hp;
+        this.xpValue = xpValue;
         // sprite = Sprite.player_down;
         fireRate = TestProjectile.FIRE_RATE;
         this.name = "Alex";
@@ -116,21 +118,19 @@ public class Player extends Mob {
     public boolean hit(Projectile p){
         if(!p.hitSomething){
             p.hitSomething = true;
-            hits++;
+            hp -= p.getDamage();
             level.add(new ParticleSpawner(x + 10, y + 10, 32, 4, level, true));
         }
-        if (hits >= maxHits){
+        if (hp <= 0){
             level.add(new ParticleSpawner(x + 10, y + 10, 512, 32, level, true));
             killedBy = p.getFiredBy();
             dead = true;
+            killedBy.xp += xpValue;
             remove();
             // If player killed exit game!
             System.exit(0);
         }
         return dead;
     }
-    
-    @Override
-    public int getHits(){ return hits; }
     
 }

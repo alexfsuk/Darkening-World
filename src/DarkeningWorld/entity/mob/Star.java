@@ -36,9 +36,11 @@ public class Star extends Mob {
     private int time = 0;
     private int maxHits = 10;
     
-    public Star(int x, int y){
+    public Star(int x, int y, int hp, int xpValue){
         this.x = x * 32;
         this.y = y * 32;
+        this.hp = hp;
+        this.xpValue = xpValue;
         sprite = Sprite.dummy;
     }
     
@@ -98,23 +100,4 @@ public class Star extends Mob {
         sprite = animSprite.getSprite();
         screen.renderMob((int)(x - 16), (int)(y - 16), this);
     }
-    
-    @Override
-    public boolean hit(Projectile p){
-        if(!p.hitSomething){
-            p.hitSomething = true;
-            hits++;
-            level.add(new ParticleSpawner(x + 10, y + 10, 32, 4, level, true));
-        }
-        if (hits >= maxHits){
-            level.add(new ParticleSpawner(x + 10, y + 10, 512, 32, level, true));
-            killedBy = p.getFiredBy();
-            dead = true;
-            remove();
-        }
-        return dead;
-    }
-    
-    @Override
-    public int getHits(){ return hits; }
 }

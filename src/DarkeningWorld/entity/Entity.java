@@ -22,9 +22,13 @@ public class Entity {
     private boolean removed = false;
     protected Level level;
     protected final Random random = new Random();
-    protected int hits = 0;
-    protected Entity killedBy;
-    protected String name;
+    public int xp;
+    protected int xpValue;
+    protected int hp;
+    
+    
+    // Make sure XP is only added once because without this code xp is added to the killer varying amounts of times
+    protected int testDead = 1;
     
     public void update(){
     }
@@ -55,11 +59,6 @@ public class Entity {
     
     public boolean hit(Projectile p){
         boolean dead = false;
-        hits++;
         return dead;
-    } 
-    public int getHits(){ return hits; }
-    public String getName(){ return name; }
-    
-    
+    }
 }

@@ -34,9 +34,11 @@ public class Shooter extends Mob {
     private double xa = 0, ya = 0;
     private int maxHits = 10;
     
-    public Shooter(int x, int y){
+    public Shooter(int x, int y, int hp, int xpValue){
      this.x = x * 32;
      this.y = y * 32;
+     this.hp = hp;
+     this.xpValue = xpValue;
      sprite = Sprite.dummy;
     }
 
@@ -94,24 +96,4 @@ public class Shooter extends Mob {
         sprite = animSprite.getSprite();
         screen.renderMob(x - 16, y - 16, this);
     }
-    
-    @Override
-    public boolean hit(Projectile p){
-        if(!p.hitSomething && p.getFiredBy() != this){
-            p.hitSomething = true;
-            hits++;
-            level.add(new ParticleSpawner(x + 10, y + 10, 32, 4, level, true));
-        }
-        if (hits >= maxHits){
-            level.add(new ParticleSpawner(x + 10, y + 10, 512, 32, level, true));
-            killedBy = p.getFiredBy();
-            dead = true;
-            remove();
-        }
-        return dead;
-    }
-    
-    @Override
-    public int getHits(){ return hits; }
-    
 }

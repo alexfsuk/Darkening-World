@@ -35,14 +35,16 @@ public class TestMap extends Level {
          } catch (IOException e) {
              System.out.println("Exception! Could not load level file!");
          }
-         for (int i = 0; i < 1; i++){
-             add(new Shooter(48, 28));
-         }
+         
+         // Add Mob: "add(new Shooter(x, y, hp, xpValue));"
+         /*for (int i = 0; i < 1; i++){
+             add(new Shooter(48, 28, 10, 10));
+         }*/
          for (int i = 0; i < 10; i++){
-             add(new Dummy(45, 29));
+             add(new Dummy(45, 29, 10, 10));
          }
          for (int i = 0; i < 1; i++){
-             add(new Star(45, 22));
+             add(new Star(45, 22, 10, 10));
          }
     }
      

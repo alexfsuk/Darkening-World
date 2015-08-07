@@ -8,6 +8,7 @@ package DarkeningWorld.entity.mob;
 import DarkeningWorld.entity.Entity;
 import DarkeningWorld.entity.projectile.Projectile;
 import DarkeningWorld.entity.projectile.TestProjectile;
+import DarkeningWorld.entity.spawner.ParticleSpawner;
 import DarkeningWorld.graphics.Screen;
 
 /**
@@ -17,9 +18,10 @@ import DarkeningWorld.graphics.Screen;
 public abstract class Mob extends Entity {
     
     protected boolean moving = false;
-    private Object Maths;
     public boolean walking;
     protected boolean dead;
+    protected Entity killedBy;
+    protected String name;
     
     protected enum Direction {
         UP, DOWN, LEFT, RIGHT;
@@ -102,11 +104,24 @@ public abstract class Mob extends Entity {
     @Override
     public abstract void render(Screen screen);
     
-    @Override
     public boolean hit(Projectile p){
-        boolean dead = false;
-        hits++;
+        if(!p.hitSomething){
+            p.hitSomething = true;
+            hp -= p.getDamage();
+            level.add(new ParticleSpawner(x + 10, y + 10, 32, 4, level, true));
+        }
+        if (hp <= 0){
+            level.add(new ParticleSpawner(x + 10, y + 10, 512, 32, level, true));
+            killedBy = p.getFiredBy();
+            dead = true;
+            // Make sure XP is only added once because without this code xp is added to the killer varying amounts of times
+            if (testDead == 1) {
+                killedBy.xp += xpValue;
+                testDead++;
+            }
+            remove();
+        }
         return dead;
-    } 
-    
+    }
+    public String getName(){ return name; }
 }

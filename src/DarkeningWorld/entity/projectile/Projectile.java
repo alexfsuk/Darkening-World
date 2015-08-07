@@ -64,4 +64,6 @@ public class Projectile extends Entity {
     @Override
     public double getY() { return y; }
     
+    public double getDamage() { return damage; }
+    
 }
