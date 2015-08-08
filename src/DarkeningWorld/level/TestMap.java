@@ -41,7 +41,7 @@ public class TestMap extends Level {
              add(new Shooter(48, 28, 10, 10));
          }*/
          for (int i = 0; i < 10; i++){
-             add(new Dummy(45, 29, 10, 10));
+             add(new Dummy(45, 29, 100, 10));
          }
          for (int i = 0; i < 1; i++){
              add(new Star(45, 22, 10, 10));

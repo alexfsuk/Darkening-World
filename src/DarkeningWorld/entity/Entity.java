@@ -24,7 +24,7 @@ public class Entity {
     protected final Random random = new Random();
     public int xp;
     protected int xpValue;
-    protected int hp;
+    public int hp;
     
     
     // Make sure XP is only added once because without this code xp is added to the killer varying amounts of times

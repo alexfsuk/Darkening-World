@@ -23,7 +23,7 @@ public class TestProjectile extends Projectile {
         size = 4;
         range = 500;
         speed = 10;
-        this.damage = 1;
+        this.damage = 10;
         sprite = Sprite.test_projectile;
         nx = speed * Math.cos(angle);
         ny = speed * Math.sin(angle);

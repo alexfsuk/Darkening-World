@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable {
         keyboard = new Keyboard();
         level = level.test_map;
         TileCoordinates playerSpawn = new TileCoordinates(43, 26);
-        player = new Player(playerSpawn.x(), playerSpawn.y(), keyboard, 10, 0);
+        player = new Player(playerSpawn.x(), playerSpawn.y(), keyboard, 100, 0);
         level.add(player);
         addKeyListener(keyboard);
         mouse = new Mouse();
@@ -155,8 +155,7 @@ public class Game extends Canvas implements Runnable {
         g.setFont(new Font("Consolas", 0, 32));
         
         g.drawString("XP: " + player.xp, 50, 70);
-        // g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64);
-        // g.drawString("Button: " + Mouse.getB(), 80, 80);
+        g.drawString("HP: " + player.hp, 50, 100);
         
         g.dispose();
         bs.show();
